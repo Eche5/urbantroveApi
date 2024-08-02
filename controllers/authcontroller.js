@@ -315,7 +315,6 @@ exports.updateWaitlistDetails = (req, res, next) => {
 
 exports.refresh = (req, res) => {
   const cookies = req.cookies;
-  console.log(cookies?.jwt);
   if (!cookies?.jwt) return res.status(401).json({ message: "Unauthorized" });
 
   const refreshToken = cookies.jwt;

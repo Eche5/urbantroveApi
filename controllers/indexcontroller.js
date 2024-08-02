@@ -323,10 +323,11 @@ exports.searchProduct = (req, res, next) => {
     });
 };
 exports.fetchCart = (req, res, next) => {
-  console.log(req.session);
   if (!req.session["cart"] || typeof req.session["cart"] === "undefined") {
     req.session["cart"] = [];
   }
+  console.log(req.session);
+
   const cart = req.session["cart"];
   res.status(200).json({
     success: true,
@@ -340,9 +341,10 @@ exports.addTocart = tryCatch(async (req, res, next) => {
   if (!req.session["cart"] || typeof req.session["cart"] === "undefined") {
     req.session["cart"] = [];
   }
-  const cart = req.session["cart"];
-  const product = await Product.findById({ productType: "product", _id: id });
+  console.log(req.session);
 
+  const cart = req.session["cart"];
+  const product = await Product.findOne({ productType: "product", _id: id });
   if (product) {
     const existingItemIndex = cart.findIndex(
       (cart) => cart.product.id.toString() === id.toString()

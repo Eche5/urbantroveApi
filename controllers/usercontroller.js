@@ -6,7 +6,6 @@ const Product = require("../models/product");
 
 exports.checkOut = (req, res, next) => {
   const { fullname, address } = req.body;
-  console.log(req.session);
   if (req.session["cart"] && req.session["cart"].length > 0) {
     const cart = req.session["cart"];
     const orderItems = [];
